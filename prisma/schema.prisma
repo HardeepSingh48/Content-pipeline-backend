@@ -98,21 +98,31 @@ model OAuthAccount {
 }
 
 model User {
-  id            String           @id @default(cuid())
-  email         String           @unique
-  passwordHash  String
-  name          String?
-  avatar        String?
-  niche         String?
-  nicheDetails  Json?
-  preferences   Json?
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-  sessions      ContentSession[]
-  integrations  Integration[]
-  oauthAccounts OAuthAccount[]
-  reelAudios    ReelAudio[]
-  role          UserRole         @default(USER)
+  id             String           @id @default(cuid())
+  email          String           @unique
+  passwordHash   String
+  name           String?
+  avatar         String?
+  niche          String?
+  nicheDetails   Json?
+  preferences    Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  sessions       ContentSession[]
+  integrations   Integration[]
+  oauthAccounts  OAuthAccount[]
+  reelAudios     ReelAudio[]
+  role           UserRole         @default(USER)
+  // Approval workflow
+  approvalStatus ApprovalStatus   @default(PENDING)
+  fullName       String?
+  companyName    String?
+  companySize    String?
+  industry       String?
+  jobTitle       String?
+  website        String?
+  useCase        String?          @db.Text
+  rejectionNote  String?
 }
 
 enum UserRole {
@@ -120,6 +130,12 @@ enum UserRole {
   ADMIN
   TESTER
   ENTERPRISE
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 model Integration {

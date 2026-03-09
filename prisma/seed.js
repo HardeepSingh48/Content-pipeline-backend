@@ -10,12 +10,13 @@ async function main() {
     // 1. Admin User
     const admin = await prisma.user.upsert({
         where: { email: 'admin@example.com' },
-        update: { role: 'ADMIN' },
+        update: { role: 'ADMIN', approvalStatus: 'APPROVED' },
         create: {
             email: 'admin@example.com',
             name: 'Admin User',
             passwordHash,
             role: 'ADMIN',
+            approvalStatus: 'APPROVED',
             preferences: {},
         },
     });
@@ -24,12 +25,13 @@ async function main() {
     // 2. Tester User
     const tester = await prisma.user.upsert({
         where: { email: 'tester@example.com' },
-        update: { role: 'TESTER' },
+        update: { role: 'TESTER', approvalStatus: 'APPROVED' },
         create: {
             email: 'tester@example.com',
             name: 'Tester User',
             passwordHash,
             role: 'TESTER',
+            approvalStatus: 'APPROVED',
             preferences: {},
         },
     });
@@ -38,12 +40,13 @@ async function main() {
     // 3. Regular User
     const user = await prisma.user.upsert({
         where: { email: 'user@example.com' },
-        update: { role: 'USER' },
+        update: { role: 'USER', approvalStatus: 'APPROVED' },
         create: {
             email: 'user@example.com',
             name: 'Regular User',
             passwordHash,
             role: 'USER',
+            approvalStatus: 'APPROVED',
             preferences: {},
         },
     });
@@ -52,12 +55,13 @@ async function main() {
     // 4. Enterprise User
     const enterprise = await prisma.user.upsert({
         where: { email: 'enterprise@example.com' },
-        update: { role: 'ENTERPRISE' },
+        update: { role: 'ENTERPRISE', approvalStatus: 'APPROVED' },
         create: {
             email: 'enterprise@example.com',
             name: 'Enterprise User',
             passwordHash,
             role: 'ENTERPRISE',
+            approvalStatus: 'APPROVED',
             preferences: {},
         },
     });
