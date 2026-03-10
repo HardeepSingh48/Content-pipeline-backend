@@ -6,28 +6,29 @@ async function main() {
     console.log('🌱 Starting seeding...');
 
     const passwordHash = await bcrypt.hash('password123', 10);
+    const AdminPasswordHash = await bcrypt.hash('Inspire@768', 10);
 
     // 1. Admin User
     const admin = await prisma.user.upsert({
-        where: { email: 'admin@example.com' },
+        where: { email: 'admin@stratiara.com' },
         update: { role: 'ADMIN', approvalStatus: 'APPROVED' },
         create: {
-            email: 'admin@example.com',
+            email: 'admin@stratiara.com',
             name: 'Admin User',
-            passwordHash,
+            passwordHash: AdminPasswordHash,
             role: 'ADMIN',
             approvalStatus: 'APPROVED',
             preferences: {},
         },
     });
-    console.log('👤 Admin user seeded: admin@example.com');
+    console.log('👤 Admin user seeded: admin@stratiara.com');
 
     // 2. Tester User
     const tester = await prisma.user.upsert({
-        where: { email: 'tester@example.com' },
+        where: { email: 'tester@stratiara.com' },
         update: { role: 'TESTER', approvalStatus: 'APPROVED' },
         create: {
-            email: 'tester@example.com',
+            email: 'tester@stratiara.com',
             name: 'Tester User',
             passwordHash,
             role: 'TESTER',
@@ -35,14 +36,14 @@ async function main() {
             preferences: {},
         },
     });
-    console.log('👤 Tester user seeded: tester@example.com');
+    console.log('👤 Tester user seeded: tester@stratiara.com');
 
     // 3. Regular User
     const user = await prisma.user.upsert({
-        where: { email: 'user@example.com' },
+        where: { email: 'user@stratiara.com' },
         update: { role: 'USER', approvalStatus: 'APPROVED' },
         create: {
-            email: 'user@example.com',
+            email: 'user@stratiara.com',
             name: 'Regular User',
             passwordHash,
             role: 'USER',
@@ -50,14 +51,14 @@ async function main() {
             preferences: {},
         },
     });
-    console.log('👤 Regular user seeded: user@example.com');
+    console.log('👤 Regular user seeded: user@stratiara.com');
 
     // 4. Enterprise User
     const enterprise = await prisma.user.upsert({
-        where: { email: 'enterprise@example.com' },
+        where: { email: 'enterprise@stratiara.com' },
         update: { role: 'ENTERPRISE', approvalStatus: 'APPROVED' },
         create: {
-            email: 'enterprise@example.com',
+            email: 'enterprise@stratiara.com',
             name: 'Enterprise User',
             passwordHash,
             role: 'ENTERPRISE',
@@ -65,7 +66,7 @@ async function main() {
             preferences: {},
         },
     });
-    console.log('👤 Enterprise user seeded: enterprise@example.com');
+    console.log('👤 Enterprise user seeded: enterprise@stratiara.com');
 
     console.log('✅ Seeding completed.');
 }
